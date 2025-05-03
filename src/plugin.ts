@@ -3,11 +3,11 @@ import type { ITwitterApiClientPlugin, ITwitterApiAfterRequestHookArgs, TwitterR
 import type { ITwitterApiRateLimitStore } from './types';
 
 const prefixes = {
-  v2: 'https://api.twitter.com/2/',
-  v2Labs: 'https://api.twitter.com/labs/2/',
-  v1: 'https://api.twitter.com/1.1/',
-  v1Upload: 'https://upload.twitter.com/1.1/',
-  v1Stream: 'https://stream.twitter.com/1.1/',
+  v2: 'https://api.x.com/2/',
+  v2Labs: 'https://api.x.com/labs/2/',
+  v1: 'https://api.x.com/1.1/',
+  v1Upload: 'https://upload.x.com/1.1/',
+  v1Stream: 'https://stream.x.com/1.1/',
 } as const;
 
 type TAvailablePrefix = keyof typeof prefixes;
@@ -38,7 +38,6 @@ export class TwitterApiRateLimitPlugin implements ITwitterApiClientPlugin {
 
   public async onResponseError(args: ITwitterApiResponseErrorHookArgs) {
     const rateLimit = args.error.rateLimit;
-
     if (rateLimit) {
       await this.store.set({
         plugin: this,
